@@ -34,13 +34,24 @@ const AvailabilityComponent = () => {
 
   const handleSave = () => {
     const selections = availability.map((week, index) => {
-      return {
-        week: `Week ${index + 1}`,
-        days: checkedState[index] ? week : [],
-      };
+      if (checkedState[index]) {
+        const days = [];
+        for (let day = week[0]; day <= week[1]; day++) {
+          days.push(day);
+        }
+        return {
+          week: `Week ${index + 1}`,
+          days: days,
+        };
+      } else {
+        return {
+          week: `Week ${index + 1}`,
+          days: [],
+        };
+      }
     });
     setSavedSelections(selections);
-    console.log("Saved Selections:", selections); //
+    console.log("Saved Selections:", selections);
   };
 
   const formatDays = (days) => {
