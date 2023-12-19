@@ -20,9 +20,17 @@ const AvailabilityMatcher = ({ userAvailability, friendsAvailability }) => {
   const [showAllWeeks, setShowAllWeeks] = useState(false);
 
   const findMatchingWeeks = () => {
-    return userAvailability.filter((week, index) => {
-      return week.days.length > 0 && friendsAvailability[index].days.length > 0;
-    });
+    return userAvailability
+      .map((userWeek, index) => {
+        const friendWeek = friendsAvailability[index];
+        const commonDays = userWeek.days.filter((day) =>
+          friendWeek.days.includes(day)
+        );
+        return commonDays.length > 0
+          ? { week: userWeek.week, days: commonDays }
+          : null;
+      })
+      .filter((week) => week !== null);
   };
 
   const matchingWeeks = findMatchingWeeks();
