@@ -40,6 +40,11 @@ const AvailabilityMatcher = ({ userAvailability, friendsAvailability }) => {
   const toggleShowAllWeeks = () => {
     setShowAllWeeks(!showAllWeeks);
   };
+
+  const formatDays = (days) => {
+    const dayNames = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+    return days.map((day) => dayNames[day]).join(", ");
+  };
   return (
     <div>
       <h3>Matched Availability</h3>
@@ -77,10 +82,22 @@ const AvailabilityMatcher = ({ userAvailability, friendsAvailability }) => {
                   <TableCell align="right">
                     {showAllWeeks ? (
                       matchingWeeks.map((week, index) => (
-                        <p key={index}>{week.week}</p>
+                        <div className="week_days">
+                          <p key={index} className="available_weeks">
+                            {week.week}:
+                          </p>
+                          <p>{formatDays(week.days)}</p>
+                        </div>
                       ))
                     ) : (
-                      <p>{matchingWeeks[currentWeekIndex].week}</p>
+                      <div className="week_days">
+                        <p className="available_weeks">
+                          {matchingWeeks[currentWeekIndex].week}:
+                        </p>
+                        <p>
+                          {formatDays(matchingWeeks[currentWeekIndex].days)}
+                        </p>
+                      </div>
                     )}
                   </TableCell>
                   <TableCell align="right">
