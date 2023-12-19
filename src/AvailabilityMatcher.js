@@ -17,7 +17,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 
 const AvailabilityMatcher = ({ userAvailability, friendsAvailability }) => {
   const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
-  const [showAllWeeks, setShowAllWeeks] = useState(false); // New state to toggle view
+  const [showAllWeeks, setShowAllWeeks] = useState(false);
 
   const findMatchingWeeks = () => {
     return userAvailability.filter((week, index) => {
@@ -112,7 +112,6 @@ const AvailabilityMatcher = ({ userAvailability, friendsAvailability }) => {
                     </Tooltip>
                   </TableCell>
                 </TableRow>
-                {/* Add more rows as needed */}
               </TableBody>
             </Table>
           </TableContainer>
